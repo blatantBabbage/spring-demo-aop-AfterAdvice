@@ -2,7 +2,6 @@ package com.nitesh.aopdemo.aspect;
 
 import com.nitesh.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -28,6 +27,25 @@ public class MyDemoLoggingAspect {
 
         // print result of the method call
         System.out.println("\n======>>>> Result is (tempAccount) : " + tempAccount);
+
+        // call the method that makes changes to return value of findAccount
+        updateAccountNameToUpperCase(tempAccount);
+
+        // print the result again after name have been converted to uppercase
+        System.out.println("\n======>>>> Names in uppercase Result is (tempAccount) : " + tempAccount);
+    }
+
+    private void updateAccountNameToUpperCase(List<Account> tempAccount) {
+
+        // loop through accounts
+        for(Account eachAccount : tempAccount) {
+
+            // here getName is getter method in Account class
+            String upperCaseName = eachAccount.getName().toUpperCase();
+
+            // update uppercase name in list returned from the findAccount method
+            eachAccount.setName(upperCaseName);
+        }
     }
 
     // Before Advice

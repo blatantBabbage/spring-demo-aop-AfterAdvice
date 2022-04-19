@@ -1,7 +1,6 @@
 package com.nitesh.aopdemo;
 
 import com.nitesh.aopdemo.dao.AccountDAO;
-import com.nitesh.aopdemo.dao.MembershipDAO;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.List;
