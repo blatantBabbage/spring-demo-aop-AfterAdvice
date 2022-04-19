@@ -40,7 +40,12 @@ public class AccountDAO {
         System.out.println(getClass() + ": adding an Account");
     }
 
-    public List<Account> findAccount() {
+    public List<Account> findAccount(boolean tripwire) {
+
+        // for learning purpose, throwing exception to trigger AfterThrow advice
+        if(tripwire){
+            throw new RuntimeException("purposely throwing exception!!");
+        }
 
         // initializing a list
         List<Account> tempAccount = new ArrayList<>();
