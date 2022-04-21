@@ -2,6 +2,7 @@ package com.nitesh.aopdemo.aspect;
 
 import com.nitesh.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
@@ -13,6 +14,33 @@ import java.util.List;
 @Component
 @Order(10)
 public class MyDemoLoggingAspect {
+
+    // Around Advice
+    @Around("execution(* com.nitesh.aopdemo.service.*.getFortune(..))")
+    public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+
+        // print the method we're advising on
+        MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
+        System.out.println("\n======>>>> Executing @Around advice on Method : " + methodSignature);
+
+        // get the begin timestamp
+        long start = System.currentTimeMillis();
+
+        // execute the target method
+        Object result = proceedingJoinPoint.proceed();
+
+        // get end timestamp
+        long end = System.currentTimeMillis();
+
+        // compute method execution duration and display
+        long duration = (end - start);
+
+        // divide by 1000 to get time in seconds as 1s = 1000 milliseconds
+        System.out.println("\n=======> Duration : " + duration/1000.0 + "seconds");
+
+        // return the result to the main method
+        return result;
+    }
 
     // After advice
     @After("execution(* com.nitesh.aopdemo.dao.AccountDAO.findAccount(..))")
