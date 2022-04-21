@@ -18,7 +18,9 @@ public class AroundDemoApp {
         System.out.println("\n\nMain program: Around advice");
         System.out.println("Calling getFortuneService");
 
-        String fortune = trafficFortuneService.getFortune();
+
+        boolean tripwire = true;
+        String fortune = trafficFortuneService.getFortune(tripwire);
         System.out.println("\nMy fortune is :" + fortune);
 
         System.out.println("Finished");

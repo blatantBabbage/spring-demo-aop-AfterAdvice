@@ -18,4 +18,12 @@ public class TrafficFortuneService {
         // return fortune
         return "Today is a good day";
     }
+
+    public String getFortune(boolean tripwire) {
+
+        if (tripwire) {
+            throw new RuntimeException("Day cannot get any better :/ ");
+        }
+        return getFortune();
+    }
 }
